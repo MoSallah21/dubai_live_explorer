@@ -1,33 +1,11 @@
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
+
 // features/air_quality/presentation/screens/air_screen.dart
 
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/air_providers.dart';
 import '../widgets/air_chart.dart';
 
-<<<<<<< Updated upstream
-class AirScreen extends ConsumerWidget {
-  const AirScreen({super.key});
-
-=======
-<<<<<<< Updated upstream
-class AirScreen extends ConsumerWidget {
-  const AirScreen({super.key});
-
-=======
 class AirScreen extends ConsumerStatefulWidget {
   const AirScreen({super.key});
 
@@ -94,21 +72,11 @@ class _AirScreenState extends ConsumerState<AirScreen>
     super.dispose();
   }
 
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   String _getAirQualityCategory(int? aqi) {
     if (aqi == null) return 'Unknown';
     if (aqi <= 50) return 'Good';
     if (aqi <= 100) return 'Moderate';
-<<<<<<< Updated upstream
-    if (aqi <= 150) return 'Unhealthy for Sensitive Groups';
-=======
-<<<<<<< Updated upstream
-    if (aqi <= 150) return 'Unhealthy for Sensitive Groups';
-=======
     if (aqi <= 150) return 'Unhealthy for Sensitive';
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     if (aqi <= 200) return 'Unhealthy';
     if (aqi <= 300) return 'Very Unhealthy';
     return 'Hazardous';
@@ -116,43 +84,6 @@ class _AirScreenState extends ConsumerState<AirScreen>
 
   Color _getAirQualityColor(int? aqi) {
     if (aqi == null) return Colors.grey;
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-    if (aqi <= 50) return Colors.green;
-    if (aqi <= 100) return Colors.yellow;
-    if (aqi <= 150) return Colors.orange;
-    if (aqi <= 200) return Colors.red;
-    if (aqi <= 300) return Colors.purple;
-    return Colors.brown;
-  }
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final airQualityAsync = ref.watch(airQualityProvider);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Air Quality Monitor'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              ref.invalidate(airQualityProvider);
-            },
-          ),
-        ],
-      ),
-      body: airQualityAsync.when(
-        data: (airData) {
-          final aqiColor = _getAirQualityColor(airData.aqi);
-          final aqiCategory = _getAirQualityCategory(airData.aqi);
-<<<<<<< Updated upstream
-=======
-=======
     if (aqi <= 50) return const Color(0xFF4CAF50);
     if (aqi <= 100) return const Color(0xFFFFEB3B);
     if (aqi <= 150) return const Color(0xFFFF9800);
@@ -226,169 +157,10 @@ class _AirScreenState extends ConsumerState<AirScreen>
           final aqiCategory = _getAirQualityCategory(airData.aqi);
           final aqiIcon = _getAirQualityIcon(airData.aqi);
           final healthAdvice = _getHealthAdvice(airData.aqi);
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
           return RefreshIndicator(
             onRefresh: () async {
               ref.invalidate(airQualityProvider);
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-            },
-            child: SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Location Card
-                  Card(
-                    elevation: 4,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.location_on, color: Colors.blue),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Text(
-                                  airData.locationName,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Last updated: ${_formatTimestamp(airData.timestamp)}',
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // AQI Card
-                  Card(
-                    elevation: 4,
-                    color: aqiColor.withOpacity(0.1),
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Column(
-                        children: [
-                          const Text(
-                            'Air Quality Index',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: aqiColor,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Text(
-                              airData.aqi?.toString() ?? 'N/A',
-                              style: const TextStyle(
-                                fontSize: 48,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            aqiCategory,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: aqiColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Pollutants Card
-                  Card(
-                    elevation: 4,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Pollutant Levels',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          _buildPollutantRow(
-                            'PM2.5',
-                            airData.pm25,
-                            airData.unit ?? 'µg/m³',
-                            Icons.blur_on,
-                          ),
-                          const Divider(height: 24),
-                          _buildPollutantRow(
-                            'PM10',
-                            airData.pm10,
-                            airData.unit ?? 'µg/m³',
-                            Icons.blur_circular,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Chart
-                  Card(
-                    elevation: 4,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Pollutant Chart',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          AirChart(
-                            pm25: airData.pm25 ?? 0,
-                            pm10: airData.pm10 ?? 0,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-<<<<<<< Updated upstream
-=======
-=======
               _fadeController.reset();
               _slideController.reset();
               _scaleController.reset();
@@ -460,62 +232,10 @@ class _AirScreenState extends ConsumerState<AirScreen>
                     ),
                   ),
                 ),
->>>>>>> Stashed changes
->>>>>>> Stashed changes
               ),
             ),
           );
         },
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-        loading: () => const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(height: 16),
-              Text('Loading air quality data...'),
-            ],
-          ),
-        ),
-        error: (error, stackTrace) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.error_outline,
-                  size: 64,
-                  color: Colors.red,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Error loading data',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  error.toString(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey[600]),
-                ),
-                const SizedBox(height: 24),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    ref.invalidate(airQualityProvider);
-                  },
-                  icon: const Icon(Icons.refresh),
-                  label: const Text('Retry'),
-                ),
-<<<<<<< Updated upstream
-=======
-=======
         loading: () => _buildLoadingState(),
         error: (error, stackTrace) => _buildErrorState(error, ref),
       ),
@@ -551,23 +271,11 @@ class _AirScreenState extends ConsumerState<AirScreen>
               colors: [
                 Colors.black.withOpacity(0.1),
                 Colors.transparent,
->>>>>>> Stashed changes
->>>>>>> Stashed changes
               ],
             ),
           ),
         ),
       ),
-<<<<<<< Updated upstream
-    );
-  }
-
-=======
-<<<<<<< Updated upstream
-    );
-  }
-
-=======
       title: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -929,24 +637,11 @@ class _AirScreenState extends ConsumerState<AirScreen>
   }
 
   /// Individual pollutant row
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   Widget _buildPollutantRow(
       String name,
       double? value,
       String unit,
       IconData icon,
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-      ) {
-    return Row(
-      children: [
-        Icon(icon, size: 32, color: Colors.blue),
-<<<<<<< Updated upstream
-=======
-=======
       Color color,
       ) {
     return Row(
@@ -959,8 +654,6 @@ class _AirScreenState extends ConsumerState<AirScreen>
           ),
           child: Icon(icon, size: 28, color: color),
         ),
->>>>>>> Stashed changes
->>>>>>> Stashed changes
         const SizedBox(width: 16),
         Expanded(
           child: Column(
@@ -971,13 +664,7 @@ class _AirScreenState extends ConsumerState<AirScreen>
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
                   color: Color(0xFF2C3E50),
->>>>>>> Stashed changes
->>>>>>> Stashed changes
                 ),
               ),
               const SizedBox(height: 4),
@@ -991,18 +678,6 @@ class _AirScreenState extends ConsumerState<AirScreen>
             ],
           ),
         ),
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-        Text(
-          value?.toStringAsFixed(1) ?? 'N/A',
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-<<<<<<< Updated upstream
-=======
-=======
         Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
@@ -1019,37 +694,12 @@ class _AirScreenState extends ConsumerState<AirScreen>
               fontWeight: FontWeight.bold,
               color: color,
             ),
->>>>>>> Stashed changes
->>>>>>> Stashed changes
           ),
         ),
       ],
     );
   }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-  String _formatTimestamp(DateTime timestamp) {
-    final now = DateTime.now();
-    final difference = now.difference(timestamp);
-
-    if (difference.inMinutes < 1) {
-      return 'Just now';
-    } else if (difference.inHours < 1) {
-      return '${difference.inMinutes} minutes ago';
-    } else if (difference.inDays < 1) {
-      return '${difference.inHours} hours ago';
-    } else {
-      return '${timestamp.day}/${timestamp.month}/${timestamp.year} ${timestamp.hour}:${timestamp.minute.toString().padLeft(2, '0')}';
-    }
-  }
-<<<<<<< Updated upstream
-}
-=======
-}
-=======
   /// Chart section
   Widget _buildChartSection(double pm25, double pm10, Color color) {
     return Container(
@@ -1264,10 +914,3 @@ class _AirScreenState extends ConsumerState<AirScreen>
     );
   }
 }
->>>>>>> Stashed changes
->>>>>>> Stashed changes
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes

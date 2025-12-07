@@ -1,26 +1,9 @@
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
 // features/insights/presentation/screens/insights_screen.dart
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/insights_provider.dart';
-import '../widgets/insights_card.dart';
 
-<<<<<<< Updated upstream
-class InsightsScreen extends ConsumerWidget {
-  const InsightsScreen({super.key});
-
-  Color _getScoreColor(int score) {
-    if (score >= 80) return Colors.green;
-    if (score >= 60) return Colors.lightGreen;
-    if (score >= 40) return Colors.orange;
-    if (score >= 20) return Colors.deepOrange;
-    return Colors.red;
-=======
 class InsightsScreen extends ConsumerStatefulWidget {
   const InsightsScreen({super.key});
 
@@ -33,7 +16,6 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
   late AnimationController _scoreController;
   late AnimationController _cardsController;
   late Animation<double> _scoreAnimation;
-  late Animation<double> _fadeAnimation;
 
   @override
   void initState() {
@@ -56,10 +38,6 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
       vsync: this,
     );
 
-    _fadeAnimation = CurvedAnimation(
-      parent: _cardsController,
-      curve: Curves.easeIn,
-    );
 
     _scoreController.forward();
     _cardsController.forward();
@@ -96,7 +74,6 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
       return [const Color(0xFFFF7043), const Color(0xFFFF5722)];
     }
     return [const Color(0xFFEF5350), const Color(0xFFF44336)];
->>>>>>> Stashed changes
   }
 
   String _getScoreLabel(int score) {
@@ -107,8 +84,6 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
     return 'Very Poor';
   }
 
-<<<<<<< Updated upstream
-=======
   IconData _getScoreIcon(int score) {
     if (score >= 80) return Icons.sentiment_very_satisfied_rounded;
     if (score >= 60) return Icons.sentiment_satisfied_rounded;
@@ -117,7 +92,6 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
     return Icons.sentiment_very_dissatisfied_rounded;
   }
 
->>>>>>> Stashed changes
   String _formatTimestamp(DateTime timestamp) {
     final now = DateTime.now();
     final difference = now.difference(timestamp);
@@ -133,10 +107,6 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
     }
   }
 
-<<<<<<< Updated upstream
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-=======
   void _showInfoDialog(BuildContext context, String title, String description) {
     showDialog(
       context: context,
@@ -196,22 +166,10 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
 
   @override
   Widget build(BuildContext context) {
->>>>>>> Stashed changes
     final insightsAsync = ref.watch(insightsProvider);
 
     return Scaffold(
       appBar: AppBar(
-<<<<<<< Updated upstream
-        title: const Text('Smart Insights'),
-        backgroundColor: Colors.purple,
-        foregroundColor: Colors.white,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              ref.invalidate(insightsProvider);
-            },
-=======
         title: const Text(
           'Smart Insights',
           style: TextStyle(fontWeight: FontWeight.w600),
@@ -230,21 +188,12 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
               ref.invalidate(insightsProvider);
             },
             tooltip: 'Refresh insights',
->>>>>>> Stashed changes
           ),
         ],
       ),
       body: insightsAsync.when(
         data: (insights) {
           final scoreColor = _getScoreColor(insights.comfortScore);
-<<<<<<< Updated upstream
-          final scoreLabel = _getScoreLabel(insights.comfortScore);
-
-          return RefreshIndicator(
-            onRefresh: () async {
-              ref.invalidate(insightsProvider);
-            },
-=======
           final scoreGradient = _getScoreGradient(insights.comfortScore);
           final scoreLabel = _getScoreLabel(insights.comfortScore);
           final scoreIcon = _getScoreIcon(insights.comfortScore);
@@ -258,129 +207,12 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
               ref.invalidate(insightsProvider);
             },
             color: const Color(0xFF9C27B0),
->>>>>>> Stashed changes
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-<<<<<<< Updated upstream
-                  // Comfort Score Card
-                  Card(
-                    elevation: 6,
-                    color: scoreColor.withOpacity(0.1),
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Column(
-                        children: [
-                          const Text(
-                            'Comfort Score',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              SizedBox(
-                                width: 140,
-                                height: 140,
-                                child: CircularProgressIndicator(
-                                  value: insights.comfortScore / 100,
-                                  strokeWidth: 12,
-                                  backgroundColor: Colors.grey[300],
-                                  color: scoreColor,
-                                ),
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    '${insights.comfortScore}',
-                                    style: TextStyle(
-                                      fontSize: 48,
-                                      fontWeight: FontWeight.bold,
-                                      color: scoreColor,
-                                    ),
-                                  ),
-                                  Text(
-                                    scoreLabel,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: scoreColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'Updated ${_formatTimestamp(insights.generatedAt)}',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-
-                  // Combined Summary Card
-                  InsightsCard(
-                    title: 'Overall Summary',
-                    content: insights.combinedSummary,
-                    icon: Icons.analytics,
-                    color: Colors.purple,
-                  ),
-
-                  // Best Time to Go Out Card
-                  InsightsCard(
-                    title: 'Best Time to Go Out',
-                    content: insights.bestTimeToGoOut,
-                    icon: Icons.access_time,
-                    color: Colors.blue,
-                  ),
-
-                  // Temperature Hint Card
-                  InsightsCard(
-                    title: 'Temperature Insights',
-                    content: insights.temperatureHint,
-                    icon: Icons.thermostat,
-                    color: Colors.orange,
-                  ),
-
-                  // Air Quality Hint Card
-                  InsightsCard(
-                    title: 'Air Quality Insights',
-                    content: insights.airQualityHint,
-                    icon: Icons.air,
-                    color: Colors.green,
-                  ),
-
-                  // Traffic Hint Card
-                  InsightsCard(
-                    title: 'Traffic Insights',
-                    content: insights.trafficHint,
-                    icon: Icons.traffic,
-                    color: Colors.red,
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  // Info Footer
-                  Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(8.0),
-=======
                   // ===== Comfort Score Card =====
                   _buildComfortScoreCard(
                     insights.comfortScore,
@@ -522,24 +354,11 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
                           color: const Color(0xFF9C27B0).withOpacity(0.2),
                           width: 1,
                         ),
->>>>>>> Stashed changes
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
-<<<<<<< Updated upstream
-                            Icons.info_outline,
-                            size: 16,
-                            color: Colors.grey[700],
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            'Insights based on current weather, air quality, and traffic',
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: Colors.grey[700],
-=======
                             Icons.info_outline_rounded,
                             size: 18,
                             color: const Color(0xFF9C27B0),
@@ -554,31 +373,18 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
                                 fontWeight: FontWeight.w500,
                               ),
                               textAlign: TextAlign.center,
->>>>>>> Stashed changes
                             ),
                           ),
                         ],
                       ),
                     ),
                   ),
-<<<<<<< Updated upstream
-=======
                   const SizedBox(height: 8),
->>>>>>> Stashed changes
                 ],
               ),
             ),
           );
         },
-<<<<<<< Updated upstream
-        loading: () => const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(height: 16),
-              Text('Analyzing data and generating insights...'),
-=======
         loading: () => Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -610,47 +416,11 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
                   color: Colors.grey[600],
                 ),
               ),
->>>>>>> Stashed changes
             ],
           ),
         ),
         error: (error, stackTrace) => Center(
           child: Padding(
-<<<<<<< Updated upstream
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.error_outline,
-                  size: 64,
-                  color: Colors.red,
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Error generating insights',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  error.toString(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey[600]),
-                ),
-                const SizedBox(height: 24),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    ref.invalidate(insightsProvider);
-                  },
-                  icon: const Icon(Icons.refresh),
-                  label: const Text('Retry'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
-                    foregroundColor: Colors.white,
-=======
             padding: const EdgeInsets.all(32.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -713,7 +483,6 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
                       borderRadius: BorderRadius.circular(12),
                     ),
                     elevation: 3,
->>>>>>> Stashed changes
                   ),
                 ),
               ],
@@ -723,9 +492,6 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
       ),
     );
   }
-<<<<<<< Updated upstream
-}
-=======
 
   // ===== Widget Builder Methods =====
 
@@ -1026,5 +792,3 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen>
     );
   }
 }
->>>>>>> Stashed changes
->>>>>>> Stashed changes

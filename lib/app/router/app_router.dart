@@ -166,7 +166,6 @@ class AppRouteInformationParser extends RouteInformationParser<RouteConfiguratio
     }
 
     // Parse other routes
-    final path = '/${uri.pathSegments.join('/')}';
     return RouteConfiguration.fromUri(uri);
   }
 

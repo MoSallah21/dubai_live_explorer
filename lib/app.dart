@@ -1,37 +1,18 @@
 // lib/app.dart
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
 import 'dart:ui';
 
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Import feature screens
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
 import 'features/alerts/presentation/providers/alerts_providers.dart';
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 import 'features/weather/presentation/screens/weather_screen.dart';
 import 'features/air_quality/presentation/screens/air_screen.dart';
 import 'features/traffic/presentation/screens/traffic_screen.dart';
 import 'features/insights/presentation/screens/insights_screen.dart';
 import 'features/alerts/presentation/screens/alerts_screen.dart';
-<<<<<<< Updated upstream
 
-=======
-<<<<<<< Updated upstream
-
-=======
-import 'package:flutter/material.dart';
-import 'dart:ui';
 
 class DynamicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -575,8 +556,6 @@ class GlassmorphicAppBar extends StatelessWidget implements PreferredSizeWidget 
     );
   }
 }
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 /// Main application widget with Riverpod integration
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -655,16 +634,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-<<<<<<< Updated upstream
-/// Home screen with bottom navigation to access all features
-=======
-<<<<<<< Updated upstream
-/// Home screen with bottom navigation to access all features
-=======
 
 /// Modern home screen with premium bottom navigation
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
@@ -672,51 +643,6 @@ class HomeScreen extends ConsumerStatefulWidget {
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-class _HomeScreenState extends ConsumerState<HomeScreen> {
-  int _currentIndex = 0;
-
-  // List of screens corresponding to bottom navigation items
-  final List<Widget> _screens = const [
-    InsightsScreen(),
-    WeatherScreen(),
-    AirScreen(),
-    TrafficScreen(),
-    AlertsScreen(),
-  ];
-
-  // Bottom navigation configuration
-  final List<BottomNavigationBarItem> _navItems = const [
-    BottomNavigationBarItem(
-      icon: Icon(Icons.analytics),
-      label: 'Insights',
-      tooltip: 'View smart insights',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.wb_sunny),
-      label: 'Weather',
-      tooltip: 'Weather forecast',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.air),
-      label: 'Air Quality',
-      tooltip: 'Air quality monitoring',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.traffic),
-      label: 'Traffic',
-      tooltip: 'Live traffic updates',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.notifications_active),
-      label: 'Alerts',
-      tooltip: 'Active alerts',
-<<<<<<< Updated upstream
-=======
-=======
 class _HomeScreenState extends ConsumerState<HomeScreen>
     with TickerProviderStateMixin {
   int _currentIndex = 0;
@@ -765,40 +691,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
       tooltip: 'Active alerts',
       color: Color(0xFFF44336),
       gradient: [Color(0xFFF44336), Color(0xFFD32F2F)],
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     ),
   ];
 
   @override
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _screens,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: _navItems,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Colors.grey,
-        selectedFontSize: 12,
-        unselectedFontSize: 11,
-        showUnselectedLabels: true,
-        elevation: 8,
-<<<<<<< Updated upstream
-=======
-=======
   void initState() {
     super.initState();
     _pageController = PageController();
@@ -1111,8 +1007,6 @@ class _NavItem extends StatelessWidget {
             ),
           ),
         ),
->>>>>>> Stashed changes
->>>>>>> Stashed changes
       ),
     );
   }

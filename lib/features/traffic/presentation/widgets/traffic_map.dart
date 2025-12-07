@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 // features/traffic/presentation/widgets/traffic_map.dart
 
 import 'package:flutter/foundation.dart';
@@ -582,4 +580,3 @@ class _TrafficMapState extends State<TrafficMap> with TickerProviderStateMixin {
     );
   }
 }
->>>>>>> Stashed changes

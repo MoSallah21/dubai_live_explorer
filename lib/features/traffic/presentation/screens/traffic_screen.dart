@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
-=======
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'dart:math' as math;
 import '../providers/traffic_providers.dart';
 import '../widgets/traffic_map.dart';
 
@@ -649,4 +646,3 @@ class _TrafficScreenState extends ConsumerState<TrafficScreen> with TickerProvid
     );
   }
 }
->>>>>>> Stashed changes
